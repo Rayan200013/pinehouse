@@ -1670,13 +1670,13 @@ document.getElementById('scrollUpButton').addEventListener('click', function(eve
   <script>
     
     document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('submit-btn').addEventListener('click', function(event) {
+  document.getElementById('contact-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission behavior
 
-    const name = document.querySelector('#contact input[name="Name"]').value;
-    const phoneNumber = document.querySelector('#contact input[name="Phone number"]').value;
-    const email = document.querySelector('#contact input[name="Email"]').value;
-    const message = document.querySelector('#contact input[name="Message"]').value;
+    const name = document.querySelector('#contact-form input[name="Name"]').value;
+    const phoneNumber = document.querySelector('#contact-form input[name="Phone number"]').value;
+    const email = document.querySelector('#contact-form input[name="Email"]').value;
+    const message = document.querySelector('#contact-form input[name="Message"]').value;
 
     // Validate the email
     if (!validateEmail(email)) {
@@ -1713,6 +1713,8 @@ document.getElementById('scrollUpButton').addEventListener('click', function(eve
   }
 });
 
+
+    
 </script>
 <!--   contact form script End -->
   
