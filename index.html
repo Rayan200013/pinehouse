@@ -1670,8 +1670,7 @@ document.getElementById('scrollUpButton').addEventListener('click', function(eve
 <!--   contact form script start -->
   <script>
     
-    document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('contact-form').addEventListener('submit', function(event) {
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission behavior
 
     const name = document.querySelector('#contact-form input[name="Name"]').value;
