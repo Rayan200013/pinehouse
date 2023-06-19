@@ -1664,6 +1664,36 @@ document.getElementById('scrollUpButton').addEventListener('click', function(eve
   </script>
   <!-- scroll up button script end -->
 
+<!--   contact form script start -->
+  document.querySelector('.form_container form').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent form submission
+
+  const name = document.querySelector('.form_container input[placeholder="Name"]').value;
+  const phoneNumber = document.querySelector('.form_container input[placeholder="Phone number"]').value;
+  const email = document.querySelector('.form_container input[placeholder="Email"]').value;
+  const message = document.querySelector('.form_container input.message_input').value;
+
+  // Validate the email
+  if (!validateEmail(email)) {
+    alert('Please enter a valid email address');
+    return;
+  }
+
+  // Generate the mailto link
+  const mailToLink = `mailto:bouezzeddinerayan@gmail.com?subject=${encodeURIComponent(name + ' - ' + phoneNumber)}&body=${encodeURIComponent(message)}`;
+
+  // Open the user's default email client
+  window.location.href = mailToLink;
+});
+
+function validateEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+
+<!--   contact form script End -->
+  
+
 
 </body>
 
