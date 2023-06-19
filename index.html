@@ -1498,9 +1498,7 @@
               <input type="text" placeholder="Phone number">
               <input type="email" placeholder="Email">
               <input type="text" placeholder="Message" class="message_input">
-              <button>
-                Send
-              </button>
+              <button type="submit">Send</button>
             </form>
           </div>
         </div>
@@ -1670,47 +1668,50 @@ document.getElementById('scrollUpButton').addEventListener('click', function(eve
 
 <!--   contact form script start -->
   <script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('submit-btn').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default form submission behavior
 
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent form submission
+    const name = document.querySelector('#contact input[name="Name"]').value;
+    const phoneNumber = document.querySelector('#contact input[name="Phone number"]').value;
+    const email = document.querySelector('#contact input[name="Email"]').value;
+    const message = document.querySelector('#contact input[name="Message"]').value;
 
-  const name = document.getElementById('name').value;
-  const phoneNumber = document.getElementById('phoneNumber').value;
-  const email = document.getElementById('email').value;
-  const message = document.getElementById('message').value;
+    // Validate the email
+    if (!validateEmail(email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
 
-  // Validate the email
-  if (!validateEmail(email)) {
-    alert('Please enter a valid email address');
-    return;
+    // Send the email and display the thank you message
+    sendEmail(name, phoneNumber, email, message);
+  });
+
+  function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
   }
 
-  // Send the email and display the thank you message
-  sendEmail(name, phoneNumber, email, message);
+  function sendEmail(name, phoneNumber, email, message) {
+    const templateParams = {
+      name: name,
+      phoneNumber: phoneNumber,
+      email: email,
+      message: message
+    };
+
+    emailjs.send(service_eyosn0m, template_ij65u7c, templateParams, TlkGeWtrKlkr2MPYx)
+      .then(function(response) {
+        // Hide the form and display the thank you message
+        document.getElementById('contact').style.display = 'none';
+        document.getElementById('thank-you-message').style.display = 'block';
+      }, function(error) {
+        console.log('Error sending email:', error);
+        alert('There was an error sending the email. Please try again.');
+      });
+  }
 });
-
-function validateEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
-}
-
-function sendEmail(name, phoneNumber, email, message) {
-  const templateParams = {
-    name: name,
-    phoneNumber: phoneNumber,
-    email: email,
-    message: message
-  };
-
-  emailjs.send(service_eyosn0m, template_ij65u7c, templateParams, TlkGeWtrKlkr2MPYx)
-    .then(function(response) {
-      // Display the thank you message
-      document.getElementById('thank-you-message').style.display = 'block';
-    }, function(error) {
-      console.log('Error sending email:', error);
-      alert('There was an error sending the email. Please try again.');
-    });
-}
 
 </script>
 <!--   contact form script End -->
