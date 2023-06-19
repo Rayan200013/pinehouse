@@ -1665,6 +1665,7 @@ document.getElementById('scrollUpButton').addEventListener('click', function(eve
   <!-- scroll up button script end -->
 
 <!--   contact form script start -->
+  <script>
   document.querySelector('.form_container form').addEventListener('submit', function(event) {
   event.preventDefault(); // Prevent form submission
 
@@ -1690,7 +1691,7 @@ function validateEmail(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
 }
-
+</script>
 <!--   contact form script End -->
   
 
