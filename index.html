@@ -1670,7 +1670,10 @@ document.getElementById('scrollUpButton').addEventListener('click', function(eve
 
 <!--   contact form script start -->
   <script>
-  function sendEmail() {
+
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent form submission
+
   const name = document.getElementById('name').value;
   const phoneNumber = document.getElementById('phoneNumber').value;
   const email = document.getElementById('email').value;
@@ -1682,19 +1685,31 @@ document.getElementById('scrollUpButton').addEventListener('click', function(eve
     return;
   }
 
-  const subject = 'Inquiry from ' + name;
-  const body = 'Name: ' + name + '\nPhone number: ' + phoneNumber + '\nEmail: ' + email + '\nMessage: ' + message;
-  const mailtoLink = 'mailto:bouezzeddinerayan@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-
-  window.location.href = mailtoLink;
-
-  // Display the thank you message
-  document.getElementById('thank-you-message').style.display = 'block';
-}
+  // Send the email and display the thank you message
+  sendEmail(name, phoneNumber, email, message);
+});
 
 function validateEmail(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
+}
+
+function sendEmail(name, phoneNumber, email, message) {
+  const templateParams = {
+    name: name,
+    phoneNumber: phoneNumber,
+    email: email,
+    message: message
+  };
+
+  emailjs.send(service_eyosn0m, template_ij65u7c, templateParams, UJzIWh3kOvAblN_P-eZgL)
+    .then(function(response) {
+      // Display the thank you message
+      document.getElementById('thank-you-message').style.display = 'block';
+    }, function(error) {
+      console.log('Error sending email:', error);
+      alert('There was an error sending the email. Please try again.');
+    });
 }
 
 </script>
