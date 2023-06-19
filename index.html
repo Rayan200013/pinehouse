@@ -29,7 +29,8 @@
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/74253e1947.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.emailjs.com/sdk/2.4.0/email.min.js"></script>
+  
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 
 <body>
@@ -1485,54 +1486,66 @@
 
   <!-- contact section -->
 
- <section class="contact_section layout_padding-bottom" id="contact">
-  <div class="container">
-    <h2>Get In touch</h2>
-    <hr>
-    <div class="row">
-      <div class="col-md-7">
-        <div class="form_container">
-          <form action="" id="contact-form">
-            <input type="text" name="Name" placeholder="Name">
-            <input type="text" name="Phone number" placeholder="Phone number">
-            <input type="email" name="Email" placeholder="Email">
-            <input type="text" name="Message" placeholder="Message" class="message_input">
-            <button type="submit">Send</button>
-          </form>
+  <section class="contact_section layout_padding-bottom " id="contact">
+    <div class="container">
+      <h2>
+        Get In touch
+      </h2>
+      <hr>
+      <div class="row">
+        <div class="col-md-7">
+          <div class="form_container">
+            <form action="">
+              <input type="text" placeholder="Name">
+              <input type="text" placeholder="Phone number">
+              <input type="email" placeholder="Email">
+              <input type="text" placeholder="Message" class="message_input">
+              <button>
+                Send
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="contact_box">
+            <a href="https://goo.gl/maps/74ChTLMsQ9n5BNR5A">
+              <div class="img-box">
+                <img src="images/location.png" alt="">
+              </div>
+              <h6>
+                MJ92+3P2, Boqaata
+              </h6>
+            </a>
+            <a href="tel:+96103797664">
+              <div class="img-box">
+                <img src="images/call.png" alt="">
+              </div>
+              <h6>
+                (+961) 03 797 664
+              </h6>
+            </a>
+            <a href="mailto:houseofpine@gmail.com">
+              <div class="img-box">
+                <img src="images/envelope.png" alt="">
+              </div>
+              <h6>
+                houseofpine@gmail.com
+              </h6>
+            </a>
+          </div>
         </div>
       </div>
-      <div class="col-md-5">
-        <div class="contact_box">
-          <a href="https://goo.gl/maps/74ChTLMsQ9n5BNR5A">
-            <div class="img-box">
-              <img src="images/location.png" alt="">
-            </div>
-            <h6>MJ92+3P2, Boqaata</h6>
-          </a>
-          <a href="tel:+96103797664">
-            <div class="img-box">
-              <img src="images/call.png" alt="">
-            </div>
-            <h6>(+961) 03 797 664</h6>
-          </a>
-          <a href="mailto:houseofpine@gmail.com">
-            <div class="img-box">
-              <img src="images/envelope.png" alt="">
-            </div>
-            <h6>houseofpine@gmail.com</h6>
-          </a>
-        </div>
+
+      <div id="thank-you-message">
+        <h3>Thank you for contacting us!</h3>
+        <p>We will get back to you soon.</p>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- end contact section -->
+    </div>
+  </section>
 
-<div id="thank-you-message" style="display: none;">
-  <h3>Thank you for contacting us!</h3>
-  <p>We will get back to you shortly.</p>
-</div>
+  <!-- end contact section -->
 
 
 
@@ -1662,49 +1675,43 @@ document.getElementById('scrollUpButton').addEventListener('click', function(eve
   <!-- scroll up button script end -->
 
 <!--   contact form script start -->
+
+  <script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<script type="text/javascript">
+  emailjs.init('TlkGeWtrKlkr2MPYx')
+</script>
+
+  
   <script>
     
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent default form submission behavior
+    
 
-    const name = document.querySelector('#contact-form input[name="Name"]').value;
-    const phoneNumber = document.querySelector('#contact-form input[name="Phone number"]').value;
-    const email = document.querySelector('#contact-form input[name="Email"]').value;
-    const message = document.querySelector('#contact-form input[name="Message"]').value;
 
-    // Validate the email
-    if (!validateEmail(email)) {
-      alert('Please enter a valid email address');
-      return;
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.querySelector('#contact-form button');
 
-    // Send the email and display the thank you message
-    sendEmail(name, phoneNumber, email, message);
-  });
+  document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-  function validateEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  }
+    btn.textContent = 'Sending...';
 
-  function sendEmail(name, phoneNumber, email, message) {
-    const templateParams = {
-      name: name,
-      phoneNumber: phoneNumber,
-      email: email,
-      message: message
-    };
+    const serviceID = service_eyosn0m;
+    const templateID =  template_ij65u7c;
 
-    emailjs.send(service_eyosn0m, template_ij65u7c, templateParams, TlkGeWtrKlkr2MPYx)
-      .then(function(response) {
-        // Hide the form and display the thank you message
-        document.getElementById('contact').style.display = 'none';
-        document.getElementById('thank-you-message').style.display = 'block';
+    emailjs.sendForm(serviceID, templateID, this)
+      .then(function() {
+        btn.textContent = 'Send';
+        alert('Email sent successfully!');
+        // Reset the form after successful submission
+        document.getElementById('contact-form').reset();
       }, function(error) {
+        btn.textContent = 'Send';
+        alert('An error occurred while sending the email. Please try again.');
         console.log('Error sending email:', error);
-        alert('There was an error sending the email. Please try again.');
       });
-  }
+  });
 });
 
 
